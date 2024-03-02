@@ -20,12 +20,13 @@
     </style>
 </head>
 <body>
+    <script src="/socket.io/socket.io.js"></script>
+    
     <h2>P2P Video Call</h2>
     <video id="localVideo" autoplay playsinline muted></video>
     <video id="remoteVideo" autoplay playsinline></video>
     <button id="callButton" onclick="call()">Start Call</button>
     <button id="stopButton" onclick="stopCall()">Stop Call</button>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="main.js"></script>
+    <script src="/main.js"></script>
 </body>
 </html>

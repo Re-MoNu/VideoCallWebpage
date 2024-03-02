@@ -3,13 +3,12 @@ const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
 
+
 const app = express();
 // Serve index.html at the root
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
-
-// Serve main.js
 app.get('/main.js', (req, res) => {
   res.sendFile(path.join(__dirname, 'main.js'));
 });
@@ -17,7 +16,7 @@ app.get('/main.js', (req, res) => {
 const server = http.createServer(app);
 const io = socketIo(server);
 
-// Your existing socket.io setup here...
+const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
@@ -38,9 +37,4 @@ io.on('connection', socket => {
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
   });
-});
-
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
 });
