@@ -1,16 +1,27 @@
-const http = require('http');
 const express = require('express');
+const http = require('http');
 const socketIo = require('socket.io');
+const path = require('path');
 
-// Initialize a new express application
 const app = express();
-// Serve static files from the public directory
-app.use(express.static('public'));
+// Serve index.html at the root
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
-// Create an HTTP server
+// Serve main.js
+app.get('/main.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'main.js'));
+});
+
 const server = http.createServer(app);
-// Initialize socket.io with the HTTP server
 const io = socketIo(server);
+
+// Your existing socket.io setup here...
+
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 // Handle connection events
 io.on('connection', socket => {
@@ -29,8 +40,7 @@ io.on('connection', socket => {
   });
 });
 
-// Start the server
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
