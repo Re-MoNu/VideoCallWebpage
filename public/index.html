@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2P Video Call</title>
+    <style>
+        #localVideo {
+            width: 200px;
+            border: 1px solid black;
+            position: fixed;
+            z-index: 10;
+            top:70%;
+            left:5%;
+        }
+        #remoteVideo {
+            width: 70%;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h2>P2P Video Call</h2>
+    <video id="localVideo" autoplay playsinline muted></video>
+    <video id="remoteVideo" autoplay playsinline></video>
+    <button id="callButton" onclick="call()">Start Call</button>
+    <button id="stopButton" onclick="stopCall()">Stop Call</button>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
