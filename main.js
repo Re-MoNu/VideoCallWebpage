@@ -5,7 +5,7 @@ const remoteVideo = document.getElementById('remoteVideo');
 let localStream;
 let remoteStream;
 let peerConnection;
-
+//something
 const socket = io.connect(window.location.origin);
 
 socket.on('message', message => {
