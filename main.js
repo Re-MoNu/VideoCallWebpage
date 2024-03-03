@@ -5,7 +5,6 @@ const remoteVideo = document.getElementById('remoteVideo');
 let localStream;
 let remoteStream;
 let peerConnection;
-//something
 const socket = io.connect(window.location.origin);
 
 socket.on('message', message => {
@@ -25,12 +24,14 @@ async function start() {
 
 async function call() {
     console.log("Connecting");
+    document.getElementById('callButton').innerText = 'Connecting';
     createPeerConnection();
     const offer = await peerConnection.createOffer();
     await peerConnection.setLocalDescription(offer);
     socket.emit('message', {'description': offer});
 }
 async function stopCall() {
+    document.getElementById('callButton').innerText = 'Start Call';
     peerConnection.close();
     peerConnection = null;
     remoteVideo.srcObject = null;
@@ -93,8 +94,5 @@ socket.on('message', async message => {
         await peerConnection.addIceCandidate(new RTCIceCandidate(message.candidate));
     }
 });
-
-
-
 
 start();
